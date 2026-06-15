@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semana de la Juventud · Reserva de actividades</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="sj">
+    <header class="hero">
+      <div class="wrap">
+        <div class="eyebrow">14 – 18 de septiembre · 8:00 a.m. a 12:00 m.</div>
+        <h1>Semana de la Juventud · Reserva de actividades</h1>
+        <p>Registra tu institución, elige cuántas actividades realizarás (charlas, talleres, laboratorios o experiencias) y asígnalas al calendario según la disponibilidad de cada lugar.</p>
+        <nav class="tabs">
+          <button class="tab on" id="tabReservar" onclick="go('reservar')">Reservar</button>
+          <button class="tab" id="tabCrono" onclick="go('crono')">Cronograma</button>
+          <button class="tab" id="tabAdmin" onclick="go('admin')">Administración</button>
+        </nav>
+      </div>
+    </header>
+    <main class="wrap" id="main"><div class="loading"><span class="spin"></span>Cargando disponibilidad…</div></main>
+    <p class="foot wrap">La información registrada es visible para todas las instituciones participantes y para la administración del evento.</p>
+  </div>
+
+  <!--
+    app.js es un módulo ES6 (import/export reales). Debe servirse
+    por HTTP (no abrir el archivo con doble clic / file://), por
+    ejemplo con:  npx serve .   o   python3 -m http.server
+  -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
