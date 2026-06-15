@@ -1,4 +1,6 @@
-# Semana de la Juventud · Sistema de reservas
+# Semana de Ciencia, Tecnología, Innovación y Juventud · Sistema de reservas
+
+Alcaldía Municipal de Nemocón.
 
 Aplicación web (sin frameworks ni build) para que instituciones,
 universidades y empresas registren actividades durante la Semana de

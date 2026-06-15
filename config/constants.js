@@ -1,7 +1,8 @@
 /**
  * config/constants.js
  * -------------------------------------------------------------
- * Configuración central del evento "Semana de la Juventud".
+ * Configuración central del evento "Semana de Ciencia, Tecnología,
+ * Innovación y Juventud" (Nemocón).
  *
  * Cualquier cambio en fechas, lugares, categorías, ejes temáticos
  * por día, tipos de actividad o reglas de negocio (cupo máximo,

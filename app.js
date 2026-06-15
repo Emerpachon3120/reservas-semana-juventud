@@ -19,7 +19,7 @@
 import { $ } from "./utils/dom.js";
 import { cargarReservas } from "./services/storageService.js";
 import { getReservas, setReservas, getVista, setVista } from "./modules/state.js";
-import { renderWizard, paso1, setN, paso2, setCat, setLugar, setSlot, paso3, confirmar, nuevoRegistro, setPaso, getForm } from "./modules/wizard.js";
+import { renderWizard, paso1, setN, paso2, setCat, setLugar, setSlot, paso3, confirmar, nuevoRegistro, setPaso, getForm, actualizarCampo } from "./modules/wizard.js";
 import { renderCrono } from "./modules/cronograma.js";
 import { renderAdmin, entrarAdmin, setEstado, borrar, exportCSV } from "./modules/admin.js";
 
@@ -57,7 +57,7 @@ Object.assign(window, {
   render,
   form: getForm(),
   // wizard
-  paso1, setN, paso2, setCat, setLugar, setSlot, paso3, confirmar, nuevoRegistro, setPaso,
+  paso1, setN, paso2, setCat, setLugar, setSlot, paso3, confirmar, nuevoRegistro, setPaso, actualizarCampo,
   // admin
   entrarAdmin, setEstado, borrar, exportCSV,
 });

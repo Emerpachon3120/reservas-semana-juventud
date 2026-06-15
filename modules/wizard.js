@@ -82,9 +82,9 @@ function ticketHtml(a, i) {
     <div class="body">
       <div class="grid2">
         <div><label class="lbl" for="nom${i}">Nombre de la actividad</label>
-          <input class="inp" id="nom${i}" value="${esc(a.nombre)}" oninput="form.acts[${i}].nombre=this.value" placeholder="Ej: Robots autónomos en acción"></div>
+          <input class="inp" id="nom${i}" value="${esc(a.nombre)}" oninput="actualizarCampo(${i},'nombre',this.value)" placeholder="Ej: Robots autónomos en acción"></div>
         <div><label class="lbl" for="tip${i}">Tipo de actividad</label>
-          <select class="inp" id="tip${i}" onchange="form.acts[${i}].tipo=this.value">
+          <select class="inp" id="tip${i}" onchange="actualizarCampo(${i},'tipo',this.value)">
             ${TIPOS.map((t) => `<option ${a.tipo === t ? "selected" : ""}>${t}</option>`).join("")}</select></div>
       </div>
       <label class="lbl">Categoría temática</label>
@@ -230,6 +230,15 @@ export function paso2() {
   form.acts = form.acts.slice(0, form.n);
   paso = 3;
   renderWizard();
+}
+
+/**
+ * Actualiza un campo de texto/select de una actividad sin volver a
+ * dibujar la pantalla (se usa en oninput/onchange para no perder el
+ * foco mientras el usuario escribe).
+ */
+export function actualizarCampo(i, campo, valor) {
+  if (form.acts[i]) form.acts[i][campo] = valor;
 }
 
 /**
