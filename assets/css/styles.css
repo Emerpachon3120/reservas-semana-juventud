@@ -13,14 +13,14 @@
   .wrap{max-width:980px;margin:0 auto;padding:0 16px}
   /* ---------- header ---------- */
   .hero{background:linear-gradient(118deg,#3D0E16 0%,#5E1A26 45%,#7A2331 75%,#C99A3B 135%);color:#fff;padding:28px 0 0;position:relative;overflow:hidden}
-  .hero-row{display:flex;align-items:center;gap:16px}
-  .hero-shield{width:60px;height:auto;flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
-  @media(max-width:560px){.hero-shield{width:44px}}
+  .hero-row{display:flex;align-items:flex-start;gap:14px}
+  .hero-shield{width:56px;height:auto;flex:none;margin-top:2px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+  @media(max-width:560px){.hero-shield{width:42px}}
   .hero::after{content:"";position:absolute;inset:auto 0 -1px 0;height:14px;background:var(--bg);clip-path:polygon(0 100%,100% 100%,100% 0,0 70%)}
   .hero .eyebrow{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;opacity:.8;font-weight:600}
-  .hero h1{font-size:clamp(1.5rem,4vw,2.3rem);font-weight:700;margin:.2rem 0 .3rem;line-height:1.2}
-  .hero h1 .h1-sub{display:block;font-size:clamp(.95rem,2.4vw,1.25rem);font-weight:500;opacity:.88;margin-top:2px}
-  .hero .hero-subtitle{font:600 .85rem 'Space Grotesk',sans-serif;letter-spacing:.02em;opacity:.9;margin:0 0 8px;text-transform:uppercase}
+  .hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(1.6rem,4.2vw,2.4rem);font-weight:700;margin:.25rem 0 .15rem;line-height:1.15;letter-spacing:-.01em}
+  .hero h1 .h1-sub{display:block;font-family:'Space Grotesk',sans-serif;font-size:clamp(1rem,2.3vw,1.2rem);font-weight:500;opacity:.82;margin-top:1px;letter-spacing:0}
+  .hero .hero-subtitle{font-family:'Inter',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.12em;opacity:.78;margin:6px 0 10px;text-transform:uppercase}
   .hero p{font-size:.9rem;opacity:.85;max-width:560px}
   .hero .hero-note{font-size:.8rem;opacity:.95;max-width:560px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 12px;margin-top:10px}
   .tabs{display:flex;gap:6px;margin-top:20px;padding-bottom:0}
