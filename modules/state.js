@@ -13,7 +13,7 @@
  */
 
 let reservas = [];
-let vista = "reservar";
+let vista = "inicio";
 let adminOk = false;
 
 export const getReservas = () => reservas;

@@ -8,6 +8,13 @@
   <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
+  <div id="splash" class="splash">
+    <img class="splash-shield" src="assets/img/escudo_nemocon.png" alt="Escudo del municipio de Nemocón">
+    <div class="splash-title">EurekaFest 2026</div>
+    <div class="splash-subtitle">Alcaldía Municipal de Nemocón</div>
+    <div class="splash-spinner"><span></span></div>
+    <div class="splash-status">Cargando información…</div>
+  </div>
   <div class="sj">
     <header class="hero">
       <div class="hero-topstrip"></div>
@@ -21,18 +28,18 @@
           <h1>EurekaFest 2026 <span class="h1-sub">“El Futuro Se Juega Aquí”</span></h1>
           <p class="hero-subtitle">Semana de Ciencia, Tecnología, Innovación y Juventud</p>
           <p>Registra tu institución, elige cuántas actividades realizarás (charlas, talleres, laboratorios o experiencias) y asígnalas al calendario según la disponibilidad de cada lugar.</p>
-          <p class="hero-note">⚠️ Importante: cada registro queda en estado <b>Confirmado parcialmente</b> hasta que la administración del evento lo valide, y puede estar sujeto a cambios.</p>
         </div>
       </div>
       <div class="wrap">
         <nav class="tabs">
-          <button class="tab on" id="tabReservar" onclick="go('reservar')">Reservar</button>
+          <button class="tab on" id="tabInicio" onclick="go('inicio')">Inicio</button>
+          <button class="tab" id="tabReservar" onclick="go('reservar')">Reservar</button>
           <button class="tab" id="tabCrono" onclick="go('crono')">Cronograma</button>
           <button class="tab" id="tabAdmin" onclick="go('admin')">Administración</button>
         </nav>
       </div>
     </header>
-    <main class="wrap" id="main"><div class="loading"><span class="spin"></span>Cargando disponibilidad…</div></main>
+    <main class="wrap" id="main"><div class="loading"><span class="spin"></span>Cargando información…</div></main>
     <p class="foot wrap">La información registrada es visible para todas las instituciones participantes y para la administración del evento.</p>
   </div>
 
@@ -42,5 +49,22 @@
     ejemplo con:  npx serve .   o   python3 -m http.server
   -->
   <script type="module" src="app.js"></script>
+  <!--
+    Red de seguridad: si app.js no llega a ejecutarse (módulo
+    bloqueado por la red, error de importación, etc.), esta pantalla
+    de carga no debe quedar pegada para siempre. Este script normal
+    (no módulo) siempre se ejecuta y oculta el splash a los pocos
+    segundos si nada más lo hizo antes, mostrando un aviso.
+  -->
+  <script>
+    setTimeout(function () {
+      var splash = document.getElementById("splash");
+      if (splash && !splash.classList.contains("hide")) {
+        var status = splash.querySelector(".splash-status");
+        if (status) status.textContent = "La carga está tardando más de lo esperado. Verifica tu conexión a internet.";
+        setTimeout(function () { splash.classList.add("hide"); }, 2500);
+      }
+    }, 6000);
+  </script>
 </body>
 </html>

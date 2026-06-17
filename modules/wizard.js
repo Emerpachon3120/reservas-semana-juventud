@@ -112,7 +112,8 @@ function ticketHtml(a, i) {
  * @param {Function} onDone - callback a ejecutar tras renderizar (p.ej. para refrescar otra vista)
  */
 export function renderWizard() {
-  let h = stepsHtml();
+  let h = `<div class="wizard-note">⚠️ Importante: cada registro queda en estado <b>Confirmado parcialmente</b> hasta que la administración del evento lo valide, y puede estar sujeto a cambios.</div>`;
+  h += stepsHtml();
 
   if (paso === 1) {
     h += `<section class="card">

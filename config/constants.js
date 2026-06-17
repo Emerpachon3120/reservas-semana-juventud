@@ -31,12 +31,30 @@ export const LUGARES = [
 
 /** Categorías temáticas: nombre visible y colores (referencian variables CSS). */
 export const CATS = {
-  gaming: { nombre: "🎮 Gaming", c: "var(--c-gaming)", l: "var(--l-gaming)" },
-  ia: { nombre: "🤖 Inteligencia Artificial", c: "var(--c-ia)", l: "var(--l-ia)" },
-  futuro: { nombre: "🌎 Futuro y Tecnología", c: "var(--c-futuro)", l: "var(--l-futuro)" },
-  creacion: { nombre: "🎬 Creación Digital", c: "var(--c-creacion)", l: "var(--l-creacion)" },
-  deporte: { nombre: "⚽ Deporte y Mundial", c: "var(--c-deporte)", l: "var(--l-deporte)" },
-  ambiente: { nombre: "🌱 Medio Ambiente", c: "var(--c-ambiente)", l: "var(--l-ambiente)" },
+  gaming: {
+    nombre: "🎮 Gaming", c: "var(--c-gaming)", l: "var(--l-gaming)",
+    temas: ["Diseño de videojuegos", "Realidad virtual (VR)", "Desarrollo de videojuegos con IA", "Narrativas gamer y streaming"],
+  },
+  ia: {
+    nombre: "🤖 Inteligencia Artificial", c: "var(--c-ia)", l: "var(--l-ia)",
+    temas: ["IA para estudiar mejor", "IA y creación de contenido", "Robots autónomos", "IA en medicina y seguridad", "IA para emprendimientos", "Cómo crear apps con IA sin saber programar"],
+  },
+  futuro: {
+    nombre: "🌎 Futuro y Tecnología", c: "var(--c-futuro)", l: "var(--l-futuro)",
+    temas: ["Ciudades inteligentes", "Casas del futuro", "Transporte autónomo", "Tecnología espacial", "Metaverso y mundos virtuales", "Ciberseguridad y hackers éticos"],
+  },
+  creacion: {
+    nombre: "🎬 Creación Digital", c: "var(--c-creacion)", l: "var(--l-creacion)",
+    temas: ["Producción audiovisual", "Creación de contenido viral", "Influencer marketing", "Edición de video", "Podcasting", "Animación 3D"],
+  },
+  deporte: {
+    nombre: "⚽ Deporte y Mundial", c: "var(--c-deporte)", l: "var(--l-deporte)",
+    temas: ["Tecnología en el fútbol", "VAR e inteligencia artificial", "eSports y fútbol virtual", "Rendimiento deportivo con IA", "Simuladores deportivos"],
+  },
+  ambiente: {
+    nombre: "🌱 Medio Ambiente", c: "var(--c-ambiente)", l: "var(--l-ambiente)",
+    temas: ["Reciclaje inteligente", "Tecnología ambiental", "Energía solar", "Agricultura tecnológica", "Cuidado del planeta"],
+  },
 };
 
 /** Tipos de actividad que una institución puede registrar. */

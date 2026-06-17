@@ -21,14 +21,16 @@ import { cargarReservas } from "./services/storageService.js";
 import { getReservas, setReservas, getVista, setVista } from "./modules/state.js";
 import { renderWizard, paso1, setN, paso2, setCat, setLugar, setSlot, paso3, confirmar, nuevoRegistro, setPaso, getForm, actualizarCampo } from "./modules/wizard.js";
 import { renderCrono } from "./modules/cronograma.js";
+import { renderInicio } from "./modules/inicio.js";
 import { renderAdmin, entrarAdmin, setEstado, borrar, exportCSV } from "./modules/admin.js";
 
-const TAB_IDS = { reservar: "Reservar", crono: "Crono", admin: "Admin" };
+const TAB_IDS = { inicio: "Inicio", reservar: "Reservar", crono: "Crono", admin: "Admin" };
 
 /** Dibuja la vista activa actual. */
 function render() {
   const vista = getVista();
-  if (vista === "reservar") renderWizard();
+  if (vista === "inicio") renderInicio();
+  else if (vista === "reservar") renderWizard();
   else if (vista === "crono") renderCrono();
   else renderAdmin();
 }
@@ -66,4 +68,9 @@ Object.assign(window, {
 (async () => {
   setReservas(await cargarReservas());
   render();
+  const splash = $("#splash");
+  if (splash) {
+    // pequeño margen para que la transición se note incluso con carga instantánea
+    setTimeout(() => splash.classList.add("hide"), 250);
+  }
 })();

@@ -40,6 +40,8 @@ src/
 └── modules/
     ├── state.js                  Estado global compartido (reservas, vista,
     │                              sesión de administración)
+    ├── inicio.js                  Módulo "Inicio": presentación del evento
+    │                              (categorías, lugares, resumen en vivo)
     ├── wizard.js                 Módulo "Reservar": asistente de 4 pasos
     ├── cronograma.js              Módulo "Cronograma": vista pública
     └── admin.js                   Módulo "Administración": validación, CSV
@@ -132,6 +134,22 @@ autenticado como administrador pueda hacer `update`/`delete`.
 - Estados de una reserva: `parcial` (Confirmado parcialmente) →
   `aprobado` (Confirmado) o `ajuste` (Requiere ajuste), gestionados
   desde Administración (clave: `juventud2026`).
+
+## Identidad visual
+
+La paleta de las 6 categorías temáticas (`--c-*` / `--l-*` en
+`assets/css/styles.css`) se derivó analizando los colores reales del
+escudo de Nemocón (vino, verde oliva del laurel, gris piedra de la
+torre, dorado del salar), en vez de colores genéricos. Si cambias el
+escudo (`assets/img/escudo_nemocon.png`), es buena práctica revisar
+si esa paleta sigue siendo coherente.
+
+Al cargar la página aparece una pantalla de splash (`#splash` en
+`index.html`) con el escudo, mientras `app.js` trae los datos de
+Firestore. Tiene una red de seguridad: si tras 6 segundos no ha
+terminado de cargar, muestra un aviso y se oculta igual a los 2.5
+segundos siguientes, para que un fallo de red no deje la pantalla
+de carga pegada para siempre.
 
 ## Mejoras futuras sugeridas
 
