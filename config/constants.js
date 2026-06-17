@@ -24,7 +24,7 @@ export const HORAS = ["8:00 - 9:00", "9:00 - 10:00", "10:00 - 11:00", "11:00 - 1
 
 /** Lugares físicos disponibles para las actividades, con su aforo. */
 export const LUGARES = [
-  { id: "teatrino", nombre: "Teatrino Municipal", aforo: 120, nota: "Charlas magistrales y actividades grandes" },
+  { id: "teatrino", nombre: "Teatrino Municipal", aforo: 30, nota: "Charlas magistrales y actividades grandes" },
   { id: "futuro", nombre: "Biblioteca El Futuro", aforo: 35, nota: "Talleres y grupos pequeños" },
   { id: "moros", nombre: "Biblioteca Ricardo Moros", aforo: 35, nota: "Talleres y grupos pequeños" },
 ];
