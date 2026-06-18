@@ -37,7 +37,7 @@ export function renderAdmin() {
     const l = LUGARES.find((x) => x.id === r.lugar);
     h += `<div class="admrow">
       <div><b>${esc(r.inst)}</b> — ${esc(r.nombre)} <span class="pill ${r.estado}">${ESTADO_LABEL[r.estado]}</span>
-        <div class="meta">${r.tipo} · ${CATS[r.cat].nombre} · ${d.label} sep · ${r.hora} · ${l.nombre} · Contacto: ${esc(r.contacto)} (${esc(r.tel)})</div></div>
+        <div class="meta">${r.tipo} · ${CATS[r.cat].nombre} · ${d.label} sep · ${r.hora} · ${l.nombre} · Contacto: ${esc(r.contacto)} (${esc(r.tel)})${r.specs ? `<br><b>Espec. técnicas:</b> ${esc(r.specs)}` : ""}${r.obs ? `<br><b>Observaciones:</b> ${esc(r.obs)}` : ""}</div></div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
         <button class="btn sm" onclick="setEstado('${r.id}','aprobado')">Aprobar</button>
         <button class="btn sm ghost" onclick="setEstado('${r.id}','ajuste')">Requiere ajuste</button>
@@ -85,12 +85,12 @@ export async function borrar(id) {
 
 export function exportCSV() {
   const reservas = getReservas();
-  const head = "Institucion,Contacto,Telefono,Actividad,Tipo,Categoria,Dia,Hora,Lugar,Estado";
-  const cell = (v) => '"' + String(v).replace(/"/g, '""') + '"';
+  const head = "Institucion,Contacto,Telefono,Actividad,Tipo,Categoria,Dia,Hora,Lugar,Especificaciones tecnicas,Observaciones generales,Estado";
+  const cell = (v) => '"' + String(v || "").replace(/"/g, '""') + '"';
   const lines = reservas.map((r) => {
     const d = DIAS.find((x) => x.id === r.dia);
     const l = LUGARES.find((x) => x.id === r.lugar);
-    return [r.inst, r.contacto, r.tel, r.nombre, r.tipo, CATS[r.cat].nombre, d.label + " sep", r.hora, l.nombre, r.estado]
+    return [r.inst, r.contacto, r.tel, r.nombre, r.tipo, CATS[r.cat].nombre, d.label + " sep", r.hora, l.nombre, r.specs || "", r.obs || "", r.estado]
       .map(cell)
       .join(",");
   });

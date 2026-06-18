@@ -39,7 +39,8 @@
   /* ---------- generic ---------- */
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-top:18px}
   .lbl{display:block;font-size:.74rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:14px 0 6px}
-  .inp,select.inp{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;font:500 .95rem 'Inter',sans-serif;color:var(--ink);background:#fff}
+  .inp,select.inp,textarea.inp{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;font:500 .95rem 'Inter',sans-serif;color:var(--ink);background:#fff}
+  textarea.inp{resize:vertical;min-height:70px;line-height:1.5}
   .inp:focus{outline:2px solid var(--primary);outline-offset:1px;border-color:var(--primary)}
   .btn{appearance:none;border:0;cursor:pointer;font:600 .92rem 'Space Grotesk',sans-serif;padding:12px 22px;border-radius:12px;background:var(--primary);color:#fff}
   .btn:hover{filter:brightness(1.08)} .btn:focus-visible{outline:3px solid var(--cyan)}

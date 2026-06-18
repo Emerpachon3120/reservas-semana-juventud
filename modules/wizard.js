@@ -25,11 +25,11 @@ import { getReservas, setReservas } from "./state.js";
 
 /** Estado propio del wizard (vive solo mientras se llena el formulario). */
 let paso = 1; // 1 institución · 2 cantidad · 3 actividades · 4 resumen · 5 éxito
-const form = { inst: "", contacto: "", tel: "", n: 0, acts: [] };
+const form = { inst: "", contacto: "", tel: "", obs: "", n: 0, acts: [] };
 
 /** Crea una actividad vacía con valores por defecto. */
 function actVacia() {
-  return { nombre: "", tipo: "Charla", cat: "", lugar: "teatrino", dia: "", hora: "" };
+  return { nombre: "", tipo: "Charla", cat: "", lugar: "teatrino", dia: "", hora: "", specs: "" };
 }
 
 /**
@@ -41,6 +41,7 @@ export function reiniciarWizard() {
   form.inst = "";
   form.contacto = "";
   form.tel = "";
+  form.obs = "";
   form.n = 0;
   form.acts = [];
   paso = 1;
@@ -104,6 +105,8 @@ function ticketHtml(a, i) {
       <label class="lbl">Elige el espacio en el calendario (${LUGARES.find((l) => l.id === a.lugar).nombre})</label>
       ${calendarioHtml}
       ${a.dia ? `<p style="font-size:.8rem;font-weight:600;color:var(--primary);margin-top:10px">Seleccionado: ${DIAS.find((d) => d.id === a.dia).label} sep · ${a.hora}</p>` : ""}
+      <label class="lbl" for="specs${i}">Especificaciones técnicas <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">(opcional · específico para esta actividad)</span></label>
+      <textarea class="inp" id="specs${i}" rows="2" oninput="actualizarCampo(${i},'specs',this.value)" placeholder="Ej: Necesitamos proyector HDMI, 10 computadores, conexión WiFi, micrófono inalámbrico...">${esc(a.specs || "")}</textarea>
     </div></article>`;
 }
 
@@ -126,6 +129,8 @@ export function renderWizard() {
         <div><label class="lbl" for="fTel">Teléfono o correo</label>
           <input class="inp" id="fTel" value="${esc(form.tel)}" placeholder="Para coordinar la validación"></div>
       </div>
+      <label class="lbl" for="fObs">Observaciones generales <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">(opcional · aplica a toda la participación de la institución)</span></label>
+      <textarea class="inp" id="fObs" rows="3" oninput="actualizarObs(this.value)" placeholder="Ej: Necesitamos acceso al lugar desde las 7:00 a.m. para montaje. Asistirán aproximadamente 25 estudiantes...">${esc(form.obs)}</textarea>
       <div id="e1" class="err" role="alert"></div>
       <div style="margin-top:18px"><button class="btn" onclick="paso1()">Continuar</button></div>
     </section>`;
@@ -166,14 +171,18 @@ export function renderWizard() {
   if (paso === 4) {
     h += `<section class="card"><h2>Confirma tu registro</h2>
       <div class="sum"><b>${esc(form.inst)}</b><br>
-        <span style="font-size:.83rem;color:var(--muted)">${esc(form.contacto)} · ${esc(form.tel)}</span></div>
+        <span style="font-size:.83rem;color:var(--muted)">${esc(form.contacto)} · ${esc(form.tel)}</span>
+        ${form.obs ? `<br><span style="font-size:.83rem;color:var(--muted);margin-top:4px;display:block"><b>Observaciones:</b> ${esc(form.obs)}</span>` : ""}
+      </div>
       ${form.acts
         .map((a, i) => {
           const d = DIAS.find((x) => x.id === a.dia);
           const l = LUGARES.find((x) => x.id === a.lugar);
           return `<div class="sum"><b>Actividad ${i + 1}: ${esc(a.nombre)}</b><br>
           <span style="font-size:.85rem">${a.tipo} · ${CATS[a.cat].nombre}</span><br>
-          <span style="font-size:.85rem;color:var(--muted)">${d.label} sep · ${a.hora} · ${l.nombre} (${l.aforo} personas)</span></div>`;
+          <span style="font-size:.85rem;color:var(--muted)">${d.label} sep · ${a.hora} · ${l.nombre} (${l.aforo} personas)</span>
+          ${a.specs ? `<br><span style="font-size:.83rem;color:var(--muted);margin-top:4px;display:block"><b>Especificaciones técnicas:</b> ${esc(a.specs)}</span>` : ""}
+          </div>`;
         })
         .join("")}
       <div class="notice info">Al confirmar, los espacios quedan bloqueados con estado <b>Confirmado parcialmente</b>. La administración del evento los revisará y los pasará a <b>Confirmado</b>, o se comunicará contigo si requiere algún ajuste.</div>
@@ -209,6 +218,7 @@ export function paso1() {
   form.inst = $("#fInst").value.trim();
   form.contacto = $("#fCon").value.trim();
   form.tel = $("#fTel").value.trim();
+  form.obs = ($("#fObs")?.value || "").trim();
   if (!form.inst || !form.contacto || !form.tel) {
     $("#e1").textContent = "Completa los tres campos para continuar.";
     return;
@@ -243,21 +253,28 @@ export function actualizarCampo(i, campo, valor) {
 }
 
 /**
- * Lee del DOM los valores actuales de los campos de texto y "tipo"
- * de cada ticket (paso 3) y los guarda en `form.acts`.
- *
- * Esto evita que un re-render (disparado al elegir categoría, lugar
- * u hora) sobrescriba el input "Nombre de la actividad" con un valor
- * desactualizado: antes de regenerar el HTML, primero se "congela"
- * lo que el usuario ya escribió.
+ * Actualiza las observaciones generales de la institución sin re-render.
+ */
+export function actualizarObs(valor) {
+  form.obs = valor;
+}
+
+/**
+ * Lee del DOM los valores actuales de los campos de texto, "tipo" y
+ * "especificaciones técnicas" de cada ticket, y las observaciones
+ * generales. Evita que un re-render sobrescriba lo que el usuario ya escribió.
  */
 function sincronizarCampos() {
   form.acts.forEach((a, i) => {
     const nom = $(`#nom${i}`);
     const tip = $(`#tip${i}`);
+    const spc = $(`#specs${i}`);
     if (nom) a.nombre = nom.value;
     if (tip) a.tipo = tip.value;
+    if (spc) a.specs = spc.value;
   });
+  const obs = $("#fObs");
+  if (obs) form.obs = obs.value;
 }
 
 export function setCat(i, k) {
