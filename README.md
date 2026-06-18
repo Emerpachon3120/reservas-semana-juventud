@@ -128,8 +128,8 @@ autenticado como administrador pueda hacer `update`/`delete`.
 - Miércoles 16: categorías Deporte + Creación Digital.
 - Jueves 17: categorías Futuro y Tecnología + Medio Ambiente.
 - Viernes 18: todas las categorías.
-- Lugares: Teatrino Municipal (30), Biblioteca El Futuro (35),
-  Biblioteca Ricardo Moros (35).
+- Lugares: Teatro Municipal (30), Biblioteca El Futuro (30),
+  Biblioteca Ricardo Moros (30).
 - Máximo 3 actividades por institución durante toda la semana.
 - Estados de una reserva: `parcial` (Confirmado parcialmente) →
   `aprobado` (Confirmado) o `ajuste` (Requiere ajuste), gestionados
