@@ -3,7 +3,7 @@
  * -------------------------------------------------------------
  * Módulo "Cronograma": vista pública de solo lectura con un
  * calendario por cada lugar (Teatro, Biblioteca El Futuro,
- * Biblioteca Ricardo Moros), coloreado por categoría temática,
+ * Teatro, Biblioteca El Futuro), coloreado por categoría temática,
  * más los contadores generales del evento.
  * -------------------------------------------------------------
  */
